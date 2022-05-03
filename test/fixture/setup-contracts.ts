@@ -1,5 +1,10 @@
 import { deployments } from "hardhat";
-import { ErrorHandlingRequire__factory, ErrorHandlingRevert__factory, LoopAdd__factory } from "../../typechain";
+import {
+  LoopAdd__factory,
+  ErrorHandlingRequire__factory,
+  ErrorHandlingRevert__factory,
+  SwitchCase__factory,
+} from "../../typechain";
 
 export const setupLoopAdd = deployments.createFixture(
   async ({deployments, ethers}, options) => {
@@ -36,6 +41,19 @@ export const setupErrorHandling = deployments.createFixture(
       contractRevert,
       thresholdRequire,
       thresholdRevert,
+    }
+  }
+);
+
+export const setupSwitchCase = deployments.createFixture(
+  async ({deployments, ethers}, options) => {
+    await deployments.fixture(["SwitchCase"]);
+    const artifact = await deployments.get("SwitchCase");
+    const signers = await ethers.getSigners();
+    const deployer = signers[0];
+    const contract = SwitchCase__factory.connect(artifact.address, deployer);
+    return {
+      contract,
     }
   }
 );

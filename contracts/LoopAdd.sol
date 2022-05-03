@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
+/// @title Three methods to compute sum
 contract LoopAdd {
     uint256 public loopSum;
 
