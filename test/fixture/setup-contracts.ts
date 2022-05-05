@@ -4,6 +4,7 @@ import {
   ErrorHandlingRequire__factory,
   ErrorHandlingRevert__factory,
   SwitchCase__factory,
+  TryCatch__factory,
 } from "../../typechain";
 
 export const setupLoopAdd = deployments.createFixture(
@@ -54,6 +55,24 @@ export const setupSwitchCase = deployments.createFixture(
     const contract = SwitchCase__factory.connect(artifact.address, deployer);
     return {
       contract,
+    }
+  }
+);
+
+export const setupTryCatch = deployments.createFixture(
+  async ({deployments, ethers}, options) => {
+    await deployments.fixture(["TryCatch"]);
+    const contractArtifact = await deployments.get("TryCatch");
+    const targetArtifact = await deployments.get("ErrorHandlingRevert");
+    const signers = await ethers.getSigners();
+    const deployer = signers[0];
+    const contract = TryCatch__factory.connect(contractArtifact.address, deployer);
+    const target = ErrorHandlingRevert__factory.connect(targetArtifact.address, deployer);
+    const thresohld = await target.THRESHOLD();
+    return {
+      contract,
+      target,
+      thresohld,
     }
   }
 );

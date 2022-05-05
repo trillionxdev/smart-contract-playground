@@ -2,19 +2,17 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const { deploy } = hre.deployments;
+  const { deploy, get } = hre.deployments;
   const { deployer } = await hre.getNamedAccounts();
 
-  await deploy("ErrorHandlingRequire", {
-    from: deployer,
-    log: true,
-  });
+  const target = await get("ErrorHandlingRevert");
 
-  await deploy("ErrorHandlingRevert", {
+  await deploy("TryCatch", {
     from: deployer,
+    args: [target.address],
     log: true,
   });
   
 };
 export default func;
-func.tags = ["ErrorHandling", "TryCatch"];
+func.tags = ["TryCatch"];

@@ -23,13 +23,13 @@ contract SwitchCase {
             let remainder := mod(newKey, 4)
             switch remainder
             case 1 {
-                sstore(0, newKey)
+                sstore(storedKey1.slot, newKey)
             }
             case 2 {
-                sstore(1, newKey)
+                sstore(storedKey2.slot, newKey)
             }
             case 3 {
-                sstore(2, newKey)
+                sstore(storedKey3.slot, newKey)
             }
             default {
                 revert(0, 0)
