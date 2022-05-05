@@ -3,12 +3,13 @@ pragma solidity ^0.8.13;
 
 import {ErrorHandlingRevert} from "./ErrorHandling.sol";
 
-/// @title Simple contract with error handling using require()
+/// @title Simple contract using try-catch
 contract TryCatch {
     ErrorHandlingRevert public target;
     uint256 public updateCount;
     uint256 public errorCount;
 
+    /// @dev set target contract address
     constructor(address targetAddr) {
         target = ErrorHandlingRevert(targetAddr);
         updateCount = 0;

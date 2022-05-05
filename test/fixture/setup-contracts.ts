@@ -5,6 +5,7 @@ import {
   ErrorHandlingRevert__factory,
   SwitchCase__factory,
   TryCatch__factory,
+  StringConcat__factory,
 } from "../../typechain";
 
 export const setupLoopAdd = deployments.createFixture(
@@ -73,6 +74,19 @@ export const setupTryCatch = deployments.createFixture(
       contract,
       target,
       thresohld,
+    }
+  }
+);
+
+export const setupStringConcat = deployments.createFixture(
+  async ({deployments, ethers}, options) => {
+    await deployments.fixture(["StringConcat"]);
+    const artifact = await deployments.get("StringConcat");
+    const signers = await ethers.getSigners();
+    const deployer = signers[0];
+    const contract = StringConcat__factory.connect(artifact.address, deployer);
+    return {
+      contract,
     }
   }
 );
