@@ -6,26 +6,26 @@ contract LoopAdd {
     uint256 public loopSum;
 
     /// @dev loop with i++
-    function loopPostAdd(uint256 lastTerm) external {
+    function loopPostAdd(uint8 lastTerm) external {
         loopSum = 0;
-        for (uint256 i = 1; i <= lastTerm; i++) {
+        for (uint8 i = 1; i <= lastTerm; i++) {
             loopSum += i;
         }
     }
 
     /// @dev loop with ++i
-    function loopPreAdd(uint256 lastTerm) external {
+    function loopPreAdd(uint8 lastTerm) external {
         loopSum = 0;
-        for (uint256 i = 1; i <= lastTerm; ++i) {
+        for (uint8 i = 1; i <= lastTerm; ++i) {
             loopSum += i;
         }
     }
 
     /// @dev loop with unchecked
-    function loopPreAddUnchecked(uint256 lastTerm) external {
+    function loopPreAddUnchecked(uint8 lastTerm) external {
         loopSum = 0;
         unchecked {
-            for (uint256 i = 1; i <= lastTerm; ++i) {
+            for (uint8 i = 1; i <= lastTerm; ++i) {
                 loopSum += i;
             }
         }

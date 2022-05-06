@@ -36,7 +36,7 @@ const config: HardhatUserConfig = {
     deployer: 0,
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
+    enabled: true,
     currency: "USD",
   },
   etherscan: {
